@@ -1,0 +1,71 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue;\f2\fnil\fcharset0 Consolas;
+}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;\red245\green245\blue245;
+\red254\green253\blue213;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;\cssrgb\c96863\c96863\c96863;
+\cssrgb\c99682\c99006\c86634;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Questions: \
+\
+
+\b\fs36 1.
+\fs24  in blog/urls.py: 
+\b0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 urlpatterns = [\
+	path('', views.post_list, name='post_list'),\
+	path('post/<int:pk>/', views.post_detail, name='post_detail'),\
+]\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\'93name=\'91post_detail\'92 is the name of the view; it tells Django which view to find in the views.py file.\'94\
+\
+\'91post/<int:pk>/\'91 informs the url path, right? so what is views.post_detail?\
+\
+Is views.post_detail  referencing a model? The text in yellow below says it is a view. \
+From: https://tutorial.djangogirls.org/en/extend_your_application/ \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs32 \cf2 \cb3 \expnd0\expndtw0\kerning0
+In 
+\f2\fs27\fsmilli13600 \cf2 \cb4 blog/urls.py
+\f1\fs32 \cf2 \cb3  we created a URL rule named 
+\f2\fs27\fsmilli13600 \cf2 \cb4 post_detail
+\f1\fs32 \cf2 \cb3  that refers to \cb5 a view called 
+\f2\fs27\fsmilli13600 \cf2 views.post_detail
+\f1\fs32 \cf2 .\cb3  This means that Django will be expecting a view function called 
+\f2\fs27\fsmilli13600 \cf2 \cb4 post_detail
+\f1\fs32 \cf2 \cb3  inside 
+\f2\fs27\fsmilli13600 \cf2 \cb4 blog/views.py
+\f1\fs32 \cf2 \cb3 .\cf2 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+
+\b\fs36 2.
+\b0\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs32 \cf6 \cb3 \expnd0\expndtw0\kerning0
+But this code has a problem. If there is no 
+\f2\fs27\fsmilli13600 \cb4 Post
+\f1\fs32 \cb3  with the given 
+\f2\fs27\fsmilli13600 \cb4 primary key
+\f1\fs32 \cb3  (
+\f2\fs27\fsmilli13600 \cb4 pk
+\f1\fs32 \cb3 ) we will have a super ugly error!\cf2 \
+\
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 (from https://tutorial.djangogirls.org/en/extend_your_application/)\
+Why would it be given a primary key that doesn\'92t exist? The loop in the html should keep that from happening, right? \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Also, post occurs 2 times in the brackets here, in blog/views.py\
+def post_detail(request, pk):\
+    post = get_object_or_404(Post, pk=pk)\
+    return render(request, 'blog/post_detail.html', \{'post': post\})\
+\
+}
