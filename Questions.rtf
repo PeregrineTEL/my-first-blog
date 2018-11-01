@@ -68,4 +68,14 @@ def post_detail(request, pk):\
     post = get_object_or_404(Post, pk=pk)\
     return render(request, 'blog/post_detail.html', \{'post': post\})\
 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs36 \cf0 3. 
+\b0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Why is Post capitalized in the the model definition, but not elsewhere? \
+e.g., post = get_object_or_404(Post, pk=pk)\
+(in post_edit.html)\
+Answer for this case: because lower case post is a variable that gets its value from the Post model.\
 }
